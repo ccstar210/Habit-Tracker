@@ -25,7 +25,9 @@ namespace WindowsFormsApp1
 
         private void Tracker_Load(object sender, EventArgs e)
         {
-            expandScreen();
+            //expand form to full screen
+            this.WindowState = FormWindowState.Maximized;
+
 
             //initialize the date to today's date and can't set a future date
             dateTimePicker1.Value = DateTime.Today;
@@ -115,6 +117,13 @@ namespace WindowsFormsApp1
             enableAdd();
         }
 
+        //Makes sure the excel file objects are properly cleaned up when the appplication is closed.
+        private void Tracker_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //MessageBox.Show("cleanup");
+            file.fileCleanup();
+        }
+
 
         //AddData() takes an entry object, sets the columns titles, and displays each member variable in the gridview
         public void AddData(Entry entry, DataGridView dgv)
@@ -165,16 +174,6 @@ namespace WindowsFormsApp1
             return table;
         }
 
-        //Expand the program to full screen
-        private void expandScreen()
-        {
-            int iHeight = Screen.PrimaryScreen.WorkingArea.Height - this.Height;
-            this.Height += iHeight;
-            int iWidth = Screen.PrimaryScreen.WorkingArea.Width - this.Width;
-            this.Width += iWidth;
-            this.CenterToScreen();
-        }
 
-        
     }
 }

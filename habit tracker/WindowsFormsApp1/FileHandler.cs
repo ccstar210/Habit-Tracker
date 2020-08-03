@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.IO;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 /* ***********************************************************************************************************************************
  * FileHandler class includes all the methods to deal with the excel file:
@@ -10,6 +11,7 @@ using System.Windows.Forms;
  * createFile()
  * saveFile()
  * closeFile()
+ * fileCleanup()
  * writeToFile()
  * readFile()
  * 
@@ -101,10 +103,15 @@ namespace WindowsFormsApp1
         {
             workbook.Close();
             excel.Quit();
-            //Cleans up the Excel interop objects, doesn't allow for multiple entries "COM object that has been separated from its underlying RCW cannot be used"
-            /*Marshal.ReleaseComObject(workbook);
+
+        }
+
+        //Cleans up the Excel interop objects
+        public void fileCleanup()
+        {
+            Marshal.ReleaseComObject(workbook);
             Marshal.ReleaseComObject(worksheet);
-            Marshal.ReleaseComObject(excel);*/
+            Marshal.ReleaseComObject(excel);
         }
 
 
