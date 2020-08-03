@@ -36,7 +36,6 @@ namespace WindowsFormsApp1
             this.components = new System.ComponentModel.Container();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -72,7 +71,6 @@ namespace WindowsFormsApp1
             this.gbNotes = new System.Windows.Forms.GroupBox();
             this.richTxtNotes = new System.Windows.Forms.RichTextBox();
             this.lblNotes = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.gbMood.SuspendLayout();
             this.gbWater.SuspendLayout();
             this.gbSleep.SuspendLayout();
@@ -106,16 +104,6 @@ namespace WindowsFormsApp1
             this.label4.Size = new System.Drawing.Size(167, 29);
             this.label4.TabIndex = 4;
             this.label4.Text = "Water Intake";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.SystemColors.Control;
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1531, 953);
-            this.pictureBox1.TabIndex = 5;
-            this.pictureBox1.TabStop = false;
             // 
             // label5
             // 
@@ -151,10 +139,10 @@ namespace WindowsFormsApp1
             // 
             this.btnAdd.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.btnAdd.Enabled = false;
-            this.btnAdd.Location = new System.Drawing.Point(1294, 705);
+            this.btnAdd.Location = new System.Drawing.Point(1294, 710);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(133, 48);
-            this.btnAdd.TabIndex = 7;
+            this.btnAdd.TabIndex = 9;
             this.btnAdd.Text = "ADD";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
@@ -172,8 +160,9 @@ namespace WindowsFormsApp1
             this.cbMood.Location = new System.Drawing.Point(16, 58);
             this.cbMood.Name = "cbMood";
             this.cbMood.Size = new System.Drawing.Size(246, 33);
-            this.cbMood.TabIndex = 0;
+            this.cbMood.TabIndex = 1;
             this.cbMood.SelectedIndexChanged += new System.EventHandler(this.cbMood_SelectedIndexChanged);
+            this.cbMood.TextChanged += new System.EventHandler(this.cbMood_TextChanged);
             // 
             // notifyIcon1
             // 
@@ -186,7 +175,7 @@ namespace WindowsFormsApp1
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTitle.AutoSize = true;
             this.lblTitle.Font = new System.Drawing.Font("Verdana", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.Location = new System.Drawing.Point(449, 18);
+            this.lblTitle.Location = new System.Drawing.Point(472, 18);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(244, 38);
             this.lblTitle.TabIndex = 14;
@@ -218,16 +207,17 @@ namespace WindowsFormsApp1
             this.cbWater.Size = new System.Drawing.Size(256, 33);
             this.cbWater.TabIndex = 0;
             this.cbWater.SelectedIndexChanged += new System.EventHandler(this.cbWater_SelectedIndexChanged);
+            this.cbWater.TextChanged += new System.EventHandler(this.cbWater_TextChanged);
             // 
             // gbMood
             // 
             this.gbMood.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.gbMood.Controls.Add(this.label3);
             this.gbMood.Controls.Add(this.cbMood);
-            this.gbMood.Location = new System.Drawing.Point(832, 59);
+            this.gbMood.Location = new System.Drawing.Point(823, 59);
             this.gbMood.Name = "gbMood";
             this.gbMood.Size = new System.Drawing.Size(281, 110);
-            this.gbMood.TabIndex = 2;
+            this.gbMood.TabIndex = 1;
             this.gbMood.TabStop = false;
             // 
             // gbWater
@@ -238,7 +228,7 @@ namespace WindowsFormsApp1
             this.gbWater.Location = new System.Drawing.Point(1142, 59);
             this.gbWater.Name = "gbWater";
             this.gbWater.Size = new System.Drawing.Size(311, 110);
-            this.gbWater.TabIndex = 1;
+            this.gbWater.TabIndex = 2;
             this.gbWater.TabStop = false;
             // 
             // gbSleep
@@ -312,6 +302,7 @@ namespace WindowsFormsApp1
             this.cbExercise.Size = new System.Drawing.Size(434, 33);
             this.cbExercise.TabIndex = 0;
             this.cbExercise.SelectedIndexChanged += new System.EventHandler(this.cbExercise_SelectedIndexChanged);
+            this.cbExercise.TextChanged += new System.EventHandler(this.cbExercise_TextChanged);
             // 
             // label1
             // 
@@ -339,11 +330,11 @@ namespace WindowsFormsApp1
             // 
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(43, 705);
+            this.dataGridView1.Location = new System.Drawing.Point(43, 710);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 62;
             this.dataGridView1.RowTemplate.Height = 28;
-            this.dataGridView1.Size = new System.Drawing.Size(1215, 153);
+            this.dataGridView1.Size = new System.Drawing.Size(1215, 188);
             this.dataGridView1.TabIndex = 15;
             // 
             // dateTimePicker1
@@ -364,7 +355,7 @@ namespace WindowsFormsApp1
             this.gbDate.Location = new System.Drawing.Point(43, 59);
             this.gbDate.Name = "gbDate";
             this.gbDate.Size = new System.Drawing.Size(725, 110);
-            this.gbDate.TabIndex = 16;
+            this.gbDate.TabIndex = 0;
             this.gbDate.TabStop = false;
             // 
             // label2
@@ -379,10 +370,12 @@ namespace WindowsFormsApp1
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.gbMeals);
             this.panel1.Controls.Add(this.gbNotes);
+            this.panel1.Controls.Add(this.gbMood);
             this.panel1.Controls.Add(this.gbWake);
             this.panel1.Controls.Add(this.gbSleep);
             this.panel1.Controls.Add(this.dataGridView1);
@@ -391,11 +384,10 @@ namespace WindowsFormsApp1
             this.panel1.Controls.Add(this.gbWorkout);
             this.panel1.Controls.Add(this.gbWater);
             this.panel1.Controls.Add(this.gbDate);
-            this.panel1.Controls.Add(this.gbMood);
             this.panel1.Controls.Add(this.btnAdd);
             this.panel1.Location = new System.Drawing.Point(12, 24);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1507, 907);
+            this.panel1.Size = new System.Drawing.Size(1507, 917);
             this.panel1.TabIndex = 17;
             // 
             // gbMeals
@@ -411,25 +403,25 @@ namespace WindowsFormsApp1
             this.gbMeals.Location = new System.Drawing.Point(43, 337);
             this.gbMeals.Name = "gbMeals";
             this.gbMeals.Size = new System.Drawing.Size(1410, 215);
-            this.gbMeals.TabIndex = 20;
+            this.gbMeals.TabIndex = 7;
             this.gbMeals.TabStop = false;
             // 
             // richTxtDinner
             // 
             this.richTxtDinner.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.richTxtDinner.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTxtDinner.Location = new System.Drawing.Point(1144, 62);
+            this.richTxtDinner.Location = new System.Drawing.Point(1004, 62);
             this.richTxtDinner.Name = "richTxtDinner";
-            this.richTxtDinner.Size = new System.Drawing.Size(240, 133);
+            this.richTxtDinner.Size = new System.Drawing.Size(380, 133);
             this.richTxtDinner.TabIndex = 5;
             this.richTxtDinner.Text = "";
             // 
             // richTxtLunch
             // 
             this.richTxtLunch.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTxtLunch.Location = new System.Drawing.Point(580, 62);
+            this.richTxtLunch.Location = new System.Drawing.Point(520, 62);
             this.richTxtLunch.Name = "richTxtLunch";
-            this.richTxtLunch.Size = new System.Drawing.Size(513, 133);
+            this.richTxtLunch.Size = new System.Drawing.Size(424, 133);
             this.richTxtLunch.TabIndex = 4;
             this.richTxtLunch.Text = "";
             // 
@@ -438,7 +430,7 @@ namespace WindowsFormsApp1
             this.richTxtBreakfast.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.richTxtBreakfast.Location = new System.Drawing.Point(30, 62);
             this.richTxtBreakfast.Name = "richTxtBreakfast";
-            this.richTxtBreakfast.Size = new System.Drawing.Size(498, 133);
+            this.richTxtBreakfast.Size = new System.Drawing.Size(444, 133);
             this.richTxtBreakfast.TabIndex = 3;
             this.richTxtBreakfast.Text = "";
             // 
@@ -446,20 +438,20 @@ namespace WindowsFormsApp1
             // 
             this.lblDinner.AutoSize = true;
             this.lblDinner.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDinner.Location = new System.Drawing.Point(1139, 22);
+            this.lblDinner.Location = new System.Drawing.Point(1009, 22);
             this.lblDinner.Name = "lblDinner";
             this.lblDinner.Size = new System.Drawing.Size(92, 29);
-            this.lblDinner.TabIndex = 2;
+            this.lblDinner.TabIndex = 1;
             this.lblDinner.Text = "Dinner";
             // 
             // lblLunch
             // 
             this.lblLunch.AutoSize = true;
             this.lblLunch.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLunch.Location = new System.Drawing.Point(580, 22);
+            this.lblLunch.Location = new System.Drawing.Point(534, 22);
             this.lblLunch.Name = "lblLunch";
             this.lblLunch.Size = new System.Drawing.Size(84, 29);
-            this.lblLunch.TabIndex = 1;
+            this.lblLunch.TabIndex = 0;
             this.lblLunch.Text = "Lunch";
             // 
             // lblBreakfast
@@ -479,7 +471,7 @@ namespace WindowsFormsApp1
             this.gbNotes.Location = new System.Drawing.Point(43, 560);
             this.gbNotes.Name = "gbNotes";
             this.gbNotes.Size = new System.Drawing.Size(882, 118);
-            this.gbNotes.TabIndex = 19;
+            this.gbNotes.TabIndex = 8;
             this.gbNotes.TabStop = false;
             // 
             // richTxtNotes
@@ -507,11 +499,9 @@ namespace WindowsFormsApp1
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1531, 953);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.pictureBox1);
             this.Name = "Tracker";
             this.Text = "Tracker";
             this.Load += new System.EventHandler(this.Tracker_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.gbMood.ResumeLayout(false);
             this.gbMood.PerformLayout();
             this.gbWater.ResumeLayout(false);
@@ -540,7 +530,6 @@ namespace WindowsFormsApp1
         #endregion
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;

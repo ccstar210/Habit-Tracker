@@ -1,19 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Runtime.InteropServices;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.IO;
 using System.Windows.Forms;
 
+/* ***********************************************************************************************************************************
+ * FileHandler class includes all the methods to deal with the excel file:
+ * openFile()
+ * createFile()
+ * saveFile()
+ * closeFile()
+ * writeToFile()
+ * readFile()
+ * 
+ * ***********************************************************************************************************************************/
 
 namespace WindowsFormsApp1
 {
     class FileHandler
     {
-        public List<Entry> entryList = new List<Entry>();
+        
         Excel.Application excel = new Excel.Application(); //create excel object
         Excel.Workbook workbook;
         Excel.Worksheet worksheet;
@@ -21,6 +27,7 @@ namespace WindowsFormsApp1
         object misValue = System.Reflection.Missing.Value;
 
 
+        //Taks in the name of the value, checks if file exists, if it doesn't creates the file, or opens the file
         public void openFile(string fileName)
         {
             if (!File.Exists(fileName))
@@ -43,6 +50,7 @@ namespace WindowsFormsApp1
 
         }
 
+        //Takes in the name of the file, create a worksheet, add the column titles and saves the file but keeps the file open
         public void createFile(string fileName)
         {
             
@@ -77,6 +85,7 @@ namespace WindowsFormsApp1
 
         }
 
+        //Takes in the name of the file and saves the excel file
         public void saveFile(string fileName)
         {
             /*Excel has different current working directory (CWD) than this program's .exe file 
@@ -87,19 +96,21 @@ namespace WindowsFormsApp1
             
         }
 
+        //Closes the excel file
         public void closeFile()
         {
             workbook.Close();
             excel.Quit();
-            //Cleans up the Excel interop objects
-            Marshal.ReleaseComObject(workbook);
+            //Cleans up the Excel interop objects, doesn't allow for multiple entries "COM object that has been separated from its underlying RCW cannot be used"
+            /*Marshal.ReleaseComObject(workbook);
             Marshal.ReleaseComObject(worksheet);
-            Marshal.ReleaseComObject(excel);
+            Marshal.ReleaseComObject(excel);*/
         }
 
 
 
-
+        //Takes an entry object and the name of the file, opens the file, gets the next available row and writes the entries to the file
+        //Saves the file and closes it
         public void writeToFile( Entry entry, string fileName )
         {
             openFile(fileName);
@@ -121,42 +132,70 @@ namespace WindowsFormsApp1
             worksheet.Cells[rowCount + 1, 11] = entry.Notes;
 
             saveFile(fileName);
+            MessageBox.Show("Entry added!");
             closeFile();
 
 
         }
 
-
-        /*public List<Entry> readFile(string fileName)
+        //Takes the name of the file, opens the file, gets all the rows expect the first one (column titles) and the first 11 columns, and adds each row to a list
+        //Closes the file and returns the list
+        public List<Entry> readFile(string fileName)
         {
             //http://csharp.net-informations.com/excel/csharp-read-excel.htm
-
+            List<Entry> entryList = new List<Entry>();
 
             if (File.Exists(fileName))
             {
 
                 openFile(fileName);
+
                 range = worksheet.UsedRange;
-                for (int row = 1; row <= range.Rows.Count; row++)
+                
+                //start at row 2 becauase don't want to include the column titles
+                for (int row = 2; row <= range.Rows.Count; row++)
                 {
+
                     List<string> listItem = new List<string>();
-                    for (int col = 1; col <= range.Columns.Count; col++)
+                    for (int col = 1; col <= 11 ; col++) //use 11 instead of range.Columns.Count so will only read the first 11 columns
                     {
-                        string str = (string)(range.Cells[row, col] as Excel.Range).Value2;
+                        string str;
+                        if( col == 1 ) //Convert Date objects
+                        {
+                            string sDate = Convert.ToString(worksheet.Cells[row, col].Value2);
+                            double date = double.Parse(sDate);
+                            str = DateTime.FromOADate(date).ToString("MM/dd/yyyy");
+                            
+                        }
+                        else if( col == 4 || col == 5 ) //Convert Time objects
+                        {
+                            string sTime = Convert.ToString(worksheet.Cells[row, col].Value2);
+                            double time = double.Parse(sTime);
+                            str = DateTime.FromOADate(time).ToString("hh:mm tt");
+                            
+                        }
+                        else if (col == 6) //Add $ sign
+                        {
+                            str = "$" + Convert.ToString(worksheet.Cells[row, col].Value2);
+
+                        }
+                        else
+                            str = Convert.ToString(worksheet.Cells[row, col].Value2);
+
                         listItem.Add(str);
                     }
 
-                    Entry entryItem = new Entry(listItem[0], listItem[6], listItem[2], listItem[1], listItem[3], listItem[4], listItem[5], listItem[6], listItem[7], listItem[8], listItem[9]);
-                    //listItem.Clear;
+                    Entry entryItem = new Entry(listItem[0], listItem[1], listItem[2], listItem[3], listItem[4], listItem[5], listItem[6], listItem[7], listItem[8], listItem[9], listItem[10]);
                     entryList.Add(entryItem);
                 }
 
-                saveFile(fileName);
+                closeFile();
+                //workbook.Close();
             }
 
             return entryList;
 
-        }*/
+        }
 
     }
 }
